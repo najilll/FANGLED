@@ -1,0 +1,72 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block content %}
+        <div class="sub-page-intro">
+            <span class="sub-page-head">Wishlist</span>
+        </div>
+        <!-- Cart Start -->
+        
+        <div class="cart-section-outer">
+            <div class="cart-section">
+                <div class="cart-heads">
+                    <div class="cart-head-pr">Product</div>
+                    <div class="cart-head-pe">Price</div>
+                    <div class="cart-head-qy">Quantity</div>
+                    <div class="cart-head-tl"><span>Total</span></div>
+                </div>
+                <div class="dd-hr my-20"></div>
+                
+    
+        <div class="cart-item">
+            <div class="cart-item-show">
+                <div class="cart-item-show-img">
+                    <img src="{{item.product.image.url}}" alt="">
+                </div>
+                <div class="cart-item-show-desc">
+                    <div class="cart-item-show-desc-top">bookkkk</div>
+                    <div class="cart-item-show-desc-remove"><a href="">Remove</a></div>
+                </div>
+            </div>
+            <div class="cart-item-price">
+                <span>Rs. 1000</span>
+            </div>
+            
+            <div class="cart-item-total">
+                <span id="total-{{item.product.id}}">Rs. 1500</span>
+            </div>
+        </div>
+        <div class="dd-hr my-20"></div>
+ 
+
+
+                
+                
+                
+                
+            </div>
+        </div>
+        <div class="checkout-redirect-area">
+            <div class="checkout-redirect-inner">
+                <div class="checkout-subtotal">
+                    <span>Subtotal</span>
+                    <span id="cart_total">Rs. 1000</span>
+                </div>
+                <div class="checkout-tax-nn">
+                    Tax included and shipping calculated at checkout
+                </div>
+                <div class="checkout-redirect-button"><a href="{% url 'web:checkout' %}"><button class="btn-general btn-black mt-10">Checkout</button></a></div>
+                <div class="checkout-redirect-button"><a href="{% url 'web:clear_cart' %}"><button class="btn-general btn-black mt-10">Clear Cart</button></a></div>
+            </div>
+        </div>
+        
+    <div class="empty-cart-message">
+        <h4>Your cart is currently empty. <a href="{% url "web:index" %}">Back to shopping</a></h4>
+    </div>
+
+        <!-- Cart End -->
+{% endblock %}
+{% block javascript %}
+
+<script src="/static/js/cart.js"></script>
+{% endblock %}

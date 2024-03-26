@@ -1,0 +1,25 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="sub-page-intro login-page-intro">
+        <span class="sub-page-head">Log In</span>
+    </div>
+    <div class="signin-container">
+        <div class="signin-form">
+            <span class="login-page-head">Login</span>
+            <span><input type="text" placeholder="Email"></span>
+            <span><input type="password" placeholder="Password"></span>
+            <span><a>Forgot your Password?</a></span>
+            <span><button>Sign In</button></span>
+        </div>
+        <div class="signup-recomendation">
+            <span class="login-page-head">New Customer</span>
+            <span class="login-paragraph">New customer? By signing up, you'll be the first to know
+                about our newest products, upcoming sales, and other
+                exciting news. You'll also receive exclusive promotions and
+                discounts that are only available to our email subscribers.</span>
+            <span><button>Register</button></span>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block content %}
+        <div class="sub-page-intro register-page-intro">
+            <span class="sub-page-head">Register</span>
+        </div>
+        <div class="register-section">
+            <div class="register-form">
+                <span class="my-25"><input type="text" placeholder="First Name"></span>
+                <span class="my-25"><input type="text" placeholder="Last Name"></span>
+                <span class="my-25"><input type="email" placeholder="Email"></span>
+                <span class="my-25"><input type="password" placeholder="Password"></span>
+                <span class="login-paragraph my-25">New customer? By signing up, you'll be the first to know about our newest products, upcoming
+                    sales, and other exciting news. You'll also receive exclusive promotions and discounts that are only
+                    available to our email subscribers.</span>
+                <span class="my-10"><button class="btn-general btn-black">Register</button></span>
+                <span class="my-10"><button class="btn-general btn-white">Log In</button></span>
+            </div>
+        </div>
+{% endblock %}

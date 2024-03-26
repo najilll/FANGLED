@@ -1,0 +1,39 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block content %}
+        <div class="sub-page-intro">
+            <span class="sub-page-head">{{ object.title }}</span>
+            <span class="sub-page-desc">{{ object.description }}</span>
+        </div>
+        <!-- Product Area Start -->
+        <div class="product-section">
+            <div class="product-section-cards">
+              {% for item in object.get_products %}
+        <div class="product-card">
+            <div class="product-cover" style="background-image: url({{item.image.url}});">
+                <div class="detail-to-div">
+                  <a href="{% url 'web:product_detail' item.slug %}"></a>
+                </div>
+                <span class="addc"><button class="cart-add-btn" data-product-id="{{ item.id }}">Add to cart</button></span>
+            </div>
+          <div class="product-section-item-desc">
+            <span>{{item.name}}</span>
+            <span>Rs. {{item.sale_price}}</span>
+          </div>
+        </div>
+        {% endfor %}
+              
+            </div>
+          </div>
+          
+          
+          
+          
+          
+        <!-- Product Area End -->
+{% endblock %}
+{% block javascript %}
+
+<script src="/static/js/index_cart.js"></script>
+{% endblock %}

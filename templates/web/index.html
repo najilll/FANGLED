@@ -1,0 +1,269 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Carousel Start -->
+<div class="cover-carousel-section">
+  <div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+      {% for s in slider %}
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+        {% endfor %}
+      
+    </div>
+    <div class="carousel-inner">
+      {% for s in slider %}
+      <div class="carousel-item active">
+        <img src="{{s.background_image.url}}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="text-dark">{{s.title}}</h5>
+          <p class="text-dark">{{s.description}}</p>
+        </div>
+      </div>
+      {% endfor %}
+      
+    </div>
+    {% if slider == 1 %}
+    
+    {% else %}
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="text-black fs-2" aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="text-black fs-2" aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+    {% endif %}
+  </div>
+</div>
+<!-- Carousel End -->
+<!-- Top Picks Start -->
+{% if sub_categories %}
+<div class="top-picks">
+  <div class="product-section-head">
+    <span>Our Top Picks</span>
+  </div>
+  <div class="owl-carousel">
+    {% for sub_category in sub_categories %}
+    <div class="item-owl" style="background-image: url({{sub_category.image.url}});">
+      <div class="owl-item-content">
+        <div class="caat">{{sub_category.title}}</div>
+        <a href="{% url 'web:subcategory_detail' sub_category.slug %}">
+          <div class="goot"><i class="bi bi-arrow-right"></i></div>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+{% endif %}
+<!-- Top Picks End -->
+<!-- New Arrival Start -->
+
+<div class="product-section">
+  {% if arrival_product %}
+  <div class="product-section-head">
+    <span>New Arrivals</span>
+  </div>
+  <div class="product-section-cards">
+    {% for product in arrival_product %}
+    <div class="product-card">
+      <div class="product-cover" style="background-image: url({{product.image.url}});">
+        <div class="detail-to-div">
+          <a href="{% url 'web:product_detail' product.slug %}"></a>
+        </div>
+        <span class="addc"><button class="" data-product-id="{{ product.id }}">Whish list</button></span>
+        <span class="addc"><button class="cart-add-btn" data-product-id="{{ product.id }}">Add to cart</button></span>
+      </div>
+      <div class="product-section-item-desc">
+        <span>{{product.name}}</span>
+        <span>Rs. {{product.sale_price}}</span>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+  <div class="product-section-foot">
+    <button>Shop More</button>
+  </div>
+  {% endif %}
+</div>
+
+<!-- New Arrival End -->
+<!-- Middle Cover Start -->
+<div class="middle-cover" style="background-image: url('{% static "image/cover-mini.webp" %}');">
+  <div class="middle-cover-content">
+    <span>Dotted Journals</span>
+    <span>Your search for the perf
+      dotted journal, ends here!</span>
+    <a>Shop Now</a>
+  </div>
+</div>
+<!-- Middle Cover End -->
+<!-- Middle Cover Mini Start -->
+<div class="middle-cover-mini">
+  <div class="middle-cover-mini-image" style="background-image: url('{% static " /image/cover-mini.webp" %}');"></div>
+  <div class="middle-cover-content-mini">
+    <span>Dotted Journals</span>
+    <span>
+      Your search for the perf
+      dotted journal, ends here!
+    </span>
+    <a>Shop Now</a>
+  </div>
+</div>
+<!-- Mini Cover Mini End -->
+<!-- Softcover Notebooks Start -->
+<div class="product-section">
+  {% if best_seller_product %}
+  <div class="product-section-head">
+    <span>Best Seller</span>
+  </div>
+  <div class="product-section-cards">
+    {% for product in best_seller_product %}
+    <div class="product-card">
+      <div class="product-cover" style="background-image: url({{product.image.url}});">
+        <div class="detail-to-div">
+          <a href="{% url 'web:product_detail' product.slug %}"></a>
+        </div>
+        <span class="addc"><button class="cart-add-btn" data-product-id="{{ product.id }}">Add to cart</button></span>
+      </div>
+      <div class="product-section-item-desc">
+        <span>{{product.name}}</span>
+        <span>Rs. {{product.sale_price}}</span>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+  <div class="product-section-foot">
+    <button>Shop More</button>
+  </div>
+  {% endif %}
+</div>
+<!-- Softcover Notebooks End -->
+<!-- Hardcover Notebooks Start -->
+
+<div class="product-section">
+  <div class="product-section-head">
+    {% for sub_name in sub_category_name %}
+    <span>{{sub_name.title}}</span>
+    {% endfor %}
+  </div>
+  <div class="product-section-cards">
+    {% for product in products %}
+    <div class="product-card">
+      <!-- Product cover image -->
+
+      <div class="product-cover" style="background-image: url({{product.image.url}});">
+        <div class="detail-to-div">
+          <a href="{% url 'web:product_detail' product.slug %}"></a>
+        </div>
+        <!-- Button to add product to cart -->
+        <span class="addc"><button class="cart-add-btn" data-product-id="{{ product.id }}">Add to cart</button></span>
+      </div>
+
+      <!-- Product description -->
+      <div class="product-section-item-desc">
+        <!-- Product name -->
+        <span>{{product.name}}</span>
+        <!-- Product price -->
+        <span>Rs. {{product.sale_price}}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="product-section-foot">
+    <a></a><button>Shop More</button>
+  </div>
+</div>
+<!-- Hardcover Notebooks End -->
+<!-- Features Start -->
+<div class="features">
+  <div class="feature">
+    <div class="feature-icon"><i class="bi bi-truck"></i></div>
+    <div class="feature-desc">
+      <span class="feature-head">Free Shipping</span>
+      <span class="feature-content">Enjoy Free shipping on all prepaid orders!</span>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="feature-icon"><i class="bi bi-cash"></i></div>
+    <div class="feature-desc">
+      <span class="feature-head">Cash on Delivary</span>
+      <span class="feature-content">Pay on delivery with a nominal charge.</span>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="feature-icon"><i class="bi bi-fingerprint"></i></div>
+    <div class="feature-desc">
+      <span class="feature-head">Secure Payment</span>
+      <span class="feature-content">Pay with multiple credit and debit cards. UPI and Paytrn Facility
+        available</span>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="feature-icon"><i class="bi bi-recycle"></i></div>
+    <div class="feature-desc">
+      <span class="feature-head">Easy Returns</span>
+      <span class="feature-content">Return or exchange within 7 days.</span>
+    </div>
+  </div>
+</div>
+<!-- Features End -->
+<!-- Showcase Start -->
+<div class="showcase">
+  <div class="follow-on-ins">
+    <span>Follow us on Instagram @fangled.in</span>
+  </div>
+  <div class="showcase-inner">
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-1.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-2.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-3.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-4.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-1.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-5.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-5.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-4.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-2.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-1.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-3.jpg" %}" alt="img">
+    </div>
+    <div class="showcase-item">
+        <img src="{% static "/image/showcase/showcase-1.jpg" %}" alt="img">
+    </div>
+</div>
+
+</div>
+<!-- Showcase End -->
+
+{% endblock %}
+
+{% block javascript %}
+
+<script src="/static/js/index_cart.js"></script>
+{% endblock %}

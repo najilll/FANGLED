@@ -1,0 +1,33 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Register for an account" %}{% endblock %}
+
+{% block content %}
+<div class="sub-page-intro register-page-intro">
+    <span class="sub-page-head">Register</span>
+</div>
+<div class="register-section">
+<form method="post" action="" class="register-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <span class="my-10"><button type="submit" class="btn-general btn-black">Register</button></span>
+    <span class="login-paragraph my-25">New customer? By signing up, you'll be the first to know about our newest products, upcoming
+        sales, and other exciting news. You'll also receive exclusive promotions and discounts that are only
+        available to our email subscribers.</span>
+</form>
+</div>
+{% endblock %}
+
+
+{% comment %}
+**registration/registration_form.html**
+Used to show the form users will fill out to register. By default, has
+the following context:
+
+``form``
+    The registration form. This will be an instance of some subclass
+    of ``django.forms.Form``; consult `Django's forms documentation
+    <http://docs.djangoproject.com/en/dev/topics/forms/>`_ for
+    information on how to display this in a template.
+{% endcomment %}

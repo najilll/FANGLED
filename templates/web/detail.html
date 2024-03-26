@@ -1,0 +1,78 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- Product Details Start -->
+    <div class="product-details-section">
+        <div class="details-carousel">
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2 detail-car-dd1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="{{ object.image.url }}" />
+                    </div>
+                    {% for item in object.get_images %}
+                        <div class="swiper-slide">
+                            <img src="{{ item.image.url }}" />
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <div thumbsSlider="" class="swiper mySwiper detail-car-dd2">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="{{ object.image.url }}" />
+                    </div>
+                    {% for item in object.get_images %}
+                        <div class="swiper-slide">
+                            <img src="{{ item.image.url }}" />
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="product-details">
+            <div class="product-details-a">
+                <span class="my-10 det-pname">{{ object.name }}</span>
+                <span class="det-price">Rs. {{ object.sale_price }}</span>
+                <span class="tx-inc">Tax included</span>
+            </div>
+            <div class="product-details-b">
+                <span>Small acts of kindness go a long way!</span>
+                <span>Get this kind, fun & super cute notebook today</span>
+                <span>Size : 6x4 inches | Softcover</span>
+                <span>Pages : 96 pages</span>
+                <span>Sheets : Ruled</span>
+            </div>
+            <div class="product-details-c">
+                <span>Quantity</span>
+                <div class="qty-addtoc">
+                    <div class="qty">
+                        <span id="detail-decrement"><i class="bi bi-dash"></i></span>
+                        <span><input name='quantity' class="detail-qty-input" type="number" id="detail-qty-input" readonly value="1"></span>
+                        <span id="detail-increment"><i class="bi bi-plus"></i></span>
+                    </div>
+                    <div class="btn-addtoc">
+                        <!-- Ensure this button has the correct class and data attribute -->
+                        <button class="addtoc cart-add-btn" type="button" data-product-id="{{ object.id }}">Add To Cart</button>
+                        <!-- <a href="{% url "web:add_cart" %}?product_id={{object.id}}">ssqsswer</a> -->
+                    </div>
+                </div>
+                <div class="buy-now">
+                    <span>Buy it Now</span>
+                </div>
+            </div>
+        </div>
+        <div class="product-description">
+            <h3>Product Detail</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae alias ducimus adipisci id dolor eum sequi iure, optio et? Vitae architecto quam tempore quis asperiores! Beatae quod vitae vel error.</p>
+        </div>
+    </div>
+    <!-- Product Details End -->
+{% endblock %}
+
+{% block javascript %}
+
+<script src="/static/js/product_detail.js"></script>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% load static %}
+
+<!-- Navbar Start -->
+<nav class="navbar-main">
+    <div class="nav-inner">
+      <div class="nav-toggle">
+        <a><img src="{% static "/image/icons/list.svg" alt="Toggle" class="nav-toggle" %}"></a>
+      </div>
+      <div class="nav-logo">
+        <a href="{% url "web:index" %}"><img src="{% static "/image/Fangled_Logo_a282abbc-8f6d-418d-b205-cb1b931f2b66.avif" alt="Logo"  %}"></a>
+      </div>
+      <div class="nav-links">
+        {% for category in header_category %}
+          <a>{{category.title}}</a>
+        {% endfor %} 
+        <a>Corporate Gifting</a>
+        <a>sale</a>
+        {% comment %} <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Notebooks
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Gift Card
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div> {% endcomment %}
+        {% comment %} <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Desk Accessories
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div> {% endcomment %}
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'auth_logout' %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Sign Out" style="    border: none;
+          background-color: transparent;">
+      </form>
+
+          {% else %}
+          <form action="{% url 'auth_login' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Sign In" style="    border: none;
+            background-color: transparent;">
+        </form>
+          {% endif %}
+      </div>
+      
+      <div class="nav-icons">
+        <a><img src="{% static "/image/nav-icon/search.svg" alt="" %}"></a>
+        {% if request.user.is_authenticated %}
+        <a class="sm-hide" href="{% url 'auth_logout' %}"><img src="{% static "/image/nav-icon/person.svg" alt="" %}"></a>
+        {% else %}
+        <a class="sm-hide" href="{% url 'auth_login' %}"><img src="{% static "/image/nav-icon/person.svg" alt="" %}"></a>
+        {% endif %}
+        <a class="sm-hide"><img src="{% static "/image/nav-icon/star.svg" alt="" %}"></a>
+        <a href="{% url "web:cart" %}"><img src="{% static "/image/nav-icon/bag.svg" alt="" %}"></a>
+      </div>
+    </div>
+    <div class="full-toggle-area" id="full-toggle-area">
+      <div class="nav-toggle-area" id="nav-toggle-area">
+        <div class="toggle-content-top">
+          <a>Notebooks</a>
+          <a>Desk Accessories</a>
+          <a>Cards</a>
+          <a>Sale</a>
+          <a>Corporate Gifting</a>
+        </div>
+        <div class="nav-toggle-bottom">
+          <span>My Account</span>
+          <button class="toggle-area-button-1">Log in</button>
+          <button class="toggle-area-button-2">Register</button>
+        </div>
+      </div>
+      <div class="nav-toggle-assist" id="nav-toggle-assist"></div>
+    </div>
+  </nav>
+  <!-- Navbar End -->

@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fangled</title>
+  <link rel="stylesheet" href="{% static "/css/style.css" %}">
+  <link rel="stylesheet" href="{% static "/plugins/bootstrap-5.3.3-dist/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{% static "/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" %}">
+  <link rel="stylesheet" href="{% static "/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}">
+  <link rel="stylesheet" href="{% static "\plugins\Swiper\swiper-bundle.min.css" %}">
+</head>
+
+<body>
+
+    <!-- Full Page Start -->
+    <div class="full-page">
+      {% if not checkout %}
+        {% include "partials/header.html" %}
+      {% else %}
+      {% include "partials/header2.html" %}
+      {% endif %}
+        {% block content %}
+        {% endblock %}
+      {% if not checkout %}
+        {% include "partials/footer.html" %}
+      {% endif %}
+    </div>
+    <!-- Full Page End -->
+
+    <script src="{% static "/js/jquery-3.7.1.min.js" %}"></script>
+    <script src="{% static "/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js" %}"></script>
+    <script src="{% static "/plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "/js/navbar_toggle.js" %}"></script>
+    <script src="{% static "/js/accordian.js" %}"></script>
+    <script src="{% static "/js/addtocart.js" %}"></script>
+    <script src="{% static "/js/quantityinc.js" %}"></script>
+    <script src="{% static "\plugins\Swiper\swiper-bundle.min.js" %}"></script>
+    <script>
+      $('.owl-carousel').owlCarousel({
+        loop: false,
+        margin: 10,
+        nav: false,
+        dots: false,
+        responsive: {
+          0: {
+            items: 1.5
+          },
+          480: {
+            items: 2.5
+          },
+          768: {
+            items: 4
+          },
+          1280: {
+            items: 5
+          }
+        }
+      })
+    </script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesProgress: false,
+      });
+      var swiper2 = new Swiper(".mySwiper2", {
+        spaceBetween: 10,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        thumbs: {
+          swiper: swiper,
+        },
+      });
+    </script>
+</body>
+
+</html>

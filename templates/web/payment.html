@@ -1,0 +1,95 @@
+{% extends 'app/base.html' %}
+{% load static  %}
+
+
+{% block content %}
+<style>
+    .payment-summary {  /* Optional class name for the section */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;  /* Optional to fill viewport height */
+    }
+  </style>
+<section class="payment-summary my-lg-14 my-8">
+	<!-- container -->
+	<div class="container">
+	  <div class="row justify-content-center">
+		<!-- col -->
+		<div class="col-md-8">
+			<div class="mb-5 card mt-6">
+				<form action="">
+					{% csrf_token %}
+				<div class="card-body p-6">
+				  <!-- heading -->
+				  <h2 class="h5 mb-4">Payment Summary</h2>
+				  <div class="card mb-2">
+					<!-- list group -->
+					<ul class="list-group list-group-flush">
+					  <li class="list-group-item d-flex justify-content-between align-items-start">
+						<div class="me-auto">
+						  <div class="fw-bold" >Subtotal</div>
+						</div>
+						<span class="fw-bold"id ="sub_total"> {{object.payable|floatformat:2}}</span>
+					  </li>
+					</ul>
+				  </div>
+                  
+				  {% if object.payment_method == 'OP' %}
+                 
+				  <div class="text-center py-3">
+					<button class="btn btn-primary" id="payButton" type="submit">Make Payment</button>
+				  </div>
+				  {% else %}
+                 
+				   <div class="text-center py-3">
+					<a class="btn btn-primary" href="{% url 'web:index'  %}">Place Order</a>
+				  </div> 
+				  {% endif %}
+				  <!-- text -->
+				  {% comment %} <p><small>By placing your order, you agree to be bound by the Tradoxi <a href="{% url 'web:terms_conditions' %}">Terms of Service</a>
+					  and <a href="{% url 'web:privacy_policy' %}">Privacy Policy.</a> </small>
+				  </p> {% endcomment %}
+				  <!-- heading -->
+				</div>
+			  </div>
+			</form>
+		</div>
+		
+	  </div>
+	</div>
+  </section>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+	var options = {
+		key: "{{ RAZOR_PAY_KEY }}",
+		amount: "{{ amount }}",
+		currency: "INR",
+		name: "FANGLED",
+		order_id: "{{razorpay_order_id}}",
+		callback_url: "{{ callback_url }}",
+	};
+
+	// initialise razorpay with the options.
+	var rzp1 = new Razorpay(options);
+	// add event listener to the payment button.
+	document.getElementById("payButton").onclick = function (e) {
+		rzp1.open();
+		e.preventDefault();
+	};
+</script>
+{% comment %} <script>
+	$(document).ready(function () {
+
+		var cart_total = $("#cart_total").text();
+		var cart_total = cart_total.replace('₹', '');
+		var shipping_price = $("#shipping_price").data('shipping_price');
+		var sub_total = parseFloat(cart_total) - parseFloat(shipping_price);
+		$("#cart_total").text("₹"+sub_total.toFixed(2));
+
+	});
+</script> {% endcomment %}
+{% endblock %}
